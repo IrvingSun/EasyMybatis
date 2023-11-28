@@ -5,7 +5,6 @@ import ibatis.session.SqlSession;
 import java.io.Serializable;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
-import java.util.Map;
 
 /**
  * @author sunw
@@ -26,6 +25,7 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
         if (Object.class.equals(method.getDeclaringClass())) {
             return method.invoke(this, args);
         } else {
+            System.out.println(sqlSession.selectOne(method.getName()).toString());
             return "代理被执行! " + mapperInterface.getName() + "." + method.getName();
         }
     }
